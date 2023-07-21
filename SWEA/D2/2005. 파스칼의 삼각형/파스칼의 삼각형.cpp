@@ -1,22 +1,32 @@
 #include <iostream>
-#include <cmath>
+#include <vector>
 using namespace std;
 
-int main(void) {
-	int N, T; 	//N: 삼각형의 크기(몇 줄), T: 테스트 케이스의 개수
-	cin >> T;
+int main() {
+    //2차원 벡터 생성 -> 첫째줄부터 10번째줄까지 적기
+    vector < vector <int> >v(10, vector<int>(10, 1));//1로 초기화
 
-	for (int k = 1; k <= T; k++) {	//T번 반복
-		cin >> N;
-		cout << "#" << k << endl;
+    for (int j = 2; j <= 9; j++) {      //셋째줄부터 숫자 지정
+        for (int k = 1; k < j; k++) {   //첫번째, 마지막 원소는 1이니까 제외하기
+            v[j][k] = v[j - 1][k - 1] + v[j - 1][k]; //오른쪽 위, 왼쪽 위 숫자 더해서 저장
+        }
+    }
 
-		//삼각형 입력
-		for (int i = 0; i < N; i++) {		//N줄 반복
-			for (int j = 0; j <= i; j++) {		//i번째 줄의 숫자 입력
-				cout << tgamma(i+1) / (tgamma(i - j+1) * tgamma(j+1))<< " "; //combination formula: nCr = n!/(n-r)!* r!
-			}
-			cout << endl;
-		}
-	}
-	return 0;
+    int T, N;
+    cin >> T;
+
+    for (int i = 1; i <= T; i++) {
+        cin >> N;
+        cout << '#' << i << '\n';
+
+        //N줄만큼 프린트
+        for (int j = 0; j < N; j++) {   //0: 1st line
+            for (int k = 0; k <= j; k++) {
+                cout << v[j][k] << ' ';
+            }
+            cout << '\n';
+        }
+    }
+
+    return 0;
 }
