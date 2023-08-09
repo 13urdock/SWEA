@@ -16,7 +16,7 @@ int main(void) {
 		}
 
 		sum -= (smallest + largest);
-		cout << "#" << i << " " << round((double)sum / 8.0) << endl;
+		cout << "#" << i << " " << round((double)sum / 8.0) << endl; //소수점 첫째 자리에서 반올림 해야하기 때문에 round(double형) 함수로 프린트하기..
 	}
 
 	return 0;
